@@ -1,0 +1,30 @@
+<a [routerLink]="[ 'new']">New Product</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Logo</th>
+            <th>Date release</th>
+            <th>Date revision</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let product of products">
+            <td>{{ product.id }}</td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.description }}</td>
+            <td>{{ product.logo }}</td>
+            <td>{{ product.date_release }}</td>
+            <td>{{ product.date_revision }}</td>
+            <td>
+                <a class="icon-button" [routerLink]="[ 'view', product.id]" title="View">&#9732;</a>
+                <a class="icon-button" [routerLink]="[ 'edit', product.id]" title="Edit">&#9998;</a>
+                <a class="icon-button" (click)="deleteProduct(product.id)" title="delete">&#10006;</a>
+            </td>
+        </tr>
+    </tbody>
+</table>

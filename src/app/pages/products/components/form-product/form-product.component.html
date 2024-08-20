@@ -1,0 +1,87 @@
+<div>
+    <form [formGroup]="form">
+        <div>
+            <div class="for-control">
+                <label for="id">ID</label>
+                <input type="text" formControlName="id" id="id"
+                    [ngClass]="{'invalid': getErrorRequired('id') || getErrorMin('id') || getErrorMax('id') || getErrorIdValidate('id')}" />
+                <span *ngIf="getErrorRequired('id')" class="text-invalid">
+                    ID is required
+                </span>
+                <span *ngIf="getErrorMin('id')" class="text-invalid">
+                    ID must be at least 3 characters
+                </span>
+                <span *ngIf="getErrorMax('id')" class="text-invalid">
+                    ID must be at most 10 characters
+                </span>
+                <span *ngIf="getErrorIdValidate('id')" class="text-invalid">
+                    This id already exists
+                </span>
+            </div>
+
+            <div class="for-control">
+                <label for="name">Name</label>
+                <input type="text" formControlName="name" id="name"
+                    [ngClass]="{'invalid': getErrorRequired('name') || getErrorMin('name') || getErrorMax('name')}" />
+                <span *ngIf="getErrorRequired('name')" class="text-invalid">
+                    Name is required
+                </span>
+                <span *ngIf="getErrorMin('name')" class="text-invalid">
+                    Name must be at least 5 characters
+                </span>
+                <span *ngIf="getErrorMax('name')" class="text-invalid">
+                    Name must be at most 100 characters
+                </span>
+            </div>
+
+            <div class="for-control">
+                <label for="description">Description</label>
+                <textarea formControlName="description" id="description"
+                    [ngClass]="{'invalid': getErrorRequired('description') || getErrorMin('description') || getErrorMax('description')}"></textarea>
+                <span *ngIf="getErrorRequired('description')" class="text-invalid">
+                    Description is required
+                </span>
+                <span *ngIf="getErrorMin('description')" class="text-invalid">
+                    Description must be at least 10 characters
+                </span>
+                <span *ngIf="getErrorMax('description')" class="text-invalid">
+                    Description must be at most 200 characters
+                </span>
+            </div>
+
+            <div class="for-control">
+                <label for="logo">Logo</label>
+                <input type="text" formControlName="logo" id="logo" [ngClass]="{'invalid': getErrorRequired('logo')}" />
+                <span *ngIf="getErrorRequired('logo')" class="text-invalid">
+                    Logo is required
+                </span>
+            </div>
+
+            <div class="for-control">
+                <label for="date_release">Date release</label>
+                <input (change)="onChangeDate()" type="date" formControlName="date_release" id="date_release"
+                    [ngClass]="{'invalid': getErrorRequired('date_release') || getErrorMinDate('date_release')}" />
+                <span *ngIf="getErrorRequired('date_release')" class="text-invalid">
+                    Date release is required
+                </span>
+                <span *ngIf="getErrorMinDate('date_release')" class="text-invalid">
+                    The date must be equal to or greater than the current date.
+                </span>
+            </div>
+
+            <div class="for-control">
+                <label for="date_revision">Date revision</label>
+                <input type="date" formControlName="date_revision" id="date_revision"
+                    [ngClass]="{'invalid': getErrorRequired('date_revision')}" />
+                <span *ngIf="getErrorRequired('date_revision')" class="text-invalid">
+                    Date revision is required
+                </span>
+            </div>
+
+
+            <div>
+                <button *ngIf="acction != 'view'" (click)="onSaveForm()" type="button">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>

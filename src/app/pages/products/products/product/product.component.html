@@ -1,0 +1,7 @@
+<a [routerLink]="[ '/product']">Products</a>
+<ng-container *ngIf="form; else elseFormTemplate">
+    <app-form-product [form]="form" [acction]="acction"></app-form-product>
+</ng-container>
+<ng-template #elseFormTemplate>
+
+</ng-template>
