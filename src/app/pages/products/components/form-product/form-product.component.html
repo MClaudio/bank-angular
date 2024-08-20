@@ -51,9 +51,13 @@
 
             <div class="for-control">
                 <label for="logo">Logo</label>
-                <input type="text" formControlName="logo" id="logo" [ngClass]="{'invalid': getErrorRequired('logo')}" />
+                <input type="text" formControlName="logo" id="logo"
+                    [ngClass]="{'invalid': getErrorRequired('logo') || getErrorUrl('logo')}" />
                 <span *ngIf="getErrorRequired('logo')" class="text-invalid">
                     Logo is required
+                </span>
+                <span *ngIf="getErrorUrl('logo')" class="text-invalid">
+                    Logo must be a valid url
                 </span>
             </div>
 

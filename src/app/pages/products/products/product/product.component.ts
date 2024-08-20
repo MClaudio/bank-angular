@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {
   validateIdInApi,
   validateMinDateFn,
+  validateUrl,
 } from '../../../../core/utils/formValidators';
 import { ProductService } from '../../../../services/product.service';
 
@@ -49,7 +50,7 @@ export class ProductComponent {
           Validators.maxLength(200),
         ],
       ],
-      logo: [null, [Validators.required]],
+      logo: [null, [Validators.required, validateUrl()]],
       date_release: [null, [Validators.required, validateMinDateFn()]],
       date_revision: [{ value: null, disabled: true }, [Validators.required]],
     });

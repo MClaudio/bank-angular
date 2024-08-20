@@ -31,3 +31,14 @@ export function validateIdInApi(service: ProductService): AsyncValidatorFn {
     );
   };
 }
+
+export function validateUrl(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const urlPattern = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i;
+    if (!control.value) {
+      return null;
+    }
+    const isValid = urlPattern.test(control.value);
+    return isValid ? null : { validateUrl: true };
+  };
+}

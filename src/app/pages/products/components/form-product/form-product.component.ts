@@ -3,6 +3,8 @@ import { FormGroup } from '@angular/forms';
 import { Product } from '../../../../core/interfaces/product';
 import { ProductService } from '../../../../services/product.service';
 import { firstValueFrom } from 'rxjs';
+import { NotificationService } from '../../../../services/notification.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-product',
@@ -13,7 +15,11 @@ export class FormProductComponent {
   @Input() form!: FormGroup;
   @Input() acction!: string;
 
-  constructor(private _productService: ProductService) {}
+  constructor(
+    private _productService: ProductService,
+    private _notificationService: NotificationService,
+    private _router: Router
+  ) {}
 
   public getErrorRequired(field: string) {
     return (
@@ -49,6 +55,12 @@ export class FormProductComponent {
       this.form.get(field)?.touched
     );
   }
+  public getErrorUrl(field: string) {
+    return (
+      this.form.get(field)?.hasError('validateUrl') &&
+      this.form.get(field)?.touched
+    );
+  }
 
   public onChangeDate() {
     let dateAddYear = new Date(this.form.get('date_release')?.value);
@@ -76,11 +88,15 @@ export class FormProductComponent {
           .split('T')[0],
       };
       console.log('data send', data);
+
       if (this.acction === 'new') {
         await this.createProduct(data);
+        this._notificationService.showSuccess('Product created successfully');
       } else {
         await this.updateProduct(data);
+        this._notificationService.showSuccess('Product updated successfully');
       }
+      this._router.navigate(['/product']);
     } catch (error) {
       console.log(error);
     }

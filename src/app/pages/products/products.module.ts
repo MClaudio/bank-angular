@@ -8,6 +8,9 @@ import { ProductListComponent } from './products/product-list/product-list.compo
 import { ComponentsModule } from './components/components.module';
 import { ProductEditComponent } from './products/product/product-edit.component';
 import { ProductViewComponent } from './products/product/product-view.component';
+import { FormsModule } from '@angular/forms';
+import { LoaderComponent } from '../../shared/loader/loader.component';
+import { NotificationComponent } from '../../shared/notification/notification.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +20,12 @@ import { ProductViewComponent } from './products/product/product-view.component'
     ProductEditComponent,
     ProductViewComponent,
   ],
-  imports: [CommonModule, ProductsRoutingModule, ComponentsModule],
+  imports: [
+    CommonModule,
+    ProductsRoutingModule,
+    ComponentsModule,
+    FormsModule,
+    LoaderComponent,
+  ],
 })
 export class ProductsModule {}

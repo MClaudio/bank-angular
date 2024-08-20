@@ -7,15 +7,24 @@
     color: red;
 }
 
-.for-control{
+.for-control {
     display: flex;
     flex-direction: column;
-    span{
+
+    span {
         font-size: 0.8em;
     }
 }
 
-a{
+a {
     cursor: pointer;
     text-decoration: none;
+}
+
+.loader-container {
+    min-height: 25vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
