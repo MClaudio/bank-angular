@@ -19,6 +19,15 @@ export class ProductViewComponent {
   public acction: string = 'view';
   private _id: string;
 
+  /**
+   * @description
+   * Constructor
+   *
+   * @param {FormBuilder} _fb - FormBuilder
+   * @param {ProductService} _productService - ProductService
+   * @param {ActivatedRoute} _route - ActivatedRoute
+   * @param {ModalService} _modalService - ModalService
+   */
   constructor(
     private _fb: FormBuilder,
     private _productService: ProductService,
@@ -33,6 +42,12 @@ export class ProductViewComponent {
     this.loadProduct();
   }
 
+  /**
+   * @description
+   * Loads the product data from the API.
+   *
+   * @returns
+   */
   private async loadProduct() {
     try {
       let resp = await firstValueFrom(
@@ -51,6 +66,12 @@ export class ProductViewComponent {
     }
   }
 
+  /**
+   * @description
+   * creates the form group.
+   *
+   * @returns
+   */
   private loadForm() {
     this.form = this._fb.group({
       id: [{ value: null, disabled: true }],

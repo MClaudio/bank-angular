@@ -16,6 +16,13 @@ export class ProductComponent {
   public form!: FormGroup;
   public acction: string = 'new';
 
+  /**
+   * @description
+   * Constructor
+   *
+   * @param {FormBuilder} _fb - FormBuilder
+   * @param {ProductService} _productService - ProductService
+   */
   constructor(
     private _fb: FormBuilder,
     private _productService: ProductService
@@ -23,6 +30,12 @@ export class ProductComponent {
     this.loadForm();
   }
 
+  /**
+   * @description
+   * creates the form group.
+   *
+   * @returns
+   */
   private loadForm() {
     this.form = this._fb.group({
       id: [

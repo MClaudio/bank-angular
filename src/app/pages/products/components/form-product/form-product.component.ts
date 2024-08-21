@@ -16,6 +16,15 @@ export class FormProductComponent {
   @Input() form!: FormGroup;
   @Input() acction!: string;
 
+  /**
+   * @description
+   * Constructor
+   *
+   * @param {ProductService} _productService - ProductService
+   * @param {NotificationService} _notificationService - NotificationService
+   * @param {Router} _router - Router
+   * @param {ModalService} _modalService - ModalService
+   */
   constructor(
     private _productService: ProductService,
     private _notificationService: NotificationService,
@@ -23,6 +32,13 @@ export class FormProductComponent {
     private _modalService: ModalService
   ) {}
 
+  /**
+   * @description
+   * Get error required
+   *
+   * @param {string} field - control name
+   * @returns
+   */
   public getErrorRequired(field: string) {
     return (
       this.form.get(field)?.hasError('required') &&
@@ -30,6 +46,13 @@ export class FormProductComponent {
     );
   }
 
+  /**
+   * @description
+   * Get error min date
+   *
+   * @param field - control name
+   * @returns
+   */
   public getErrorMinDate(field: string) {
     return (
       this.form.get(field)?.hasError('validateDate') &&
@@ -37,6 +60,13 @@ export class FormProductComponent {
     );
   }
 
+  /**
+   * @description
+   * Get error id validate
+   *
+   * @param field - control name
+   * @returns
+   */
   public getErrorIdValidate(field: string) {
     return (
       this.form.get(field)?.hasError('idValidation') &&
@@ -44,6 +74,13 @@ export class FormProductComponent {
     );
   }
 
+  /**
+   * @description
+   * Get error max length
+   *
+   * @param field - control name
+   * @returns
+   */
   public getErrorMax(field: string) {
     return (
       this.form.get(field)?.hasError('maxlength') &&
@@ -51,12 +88,27 @@ export class FormProductComponent {
     );
   }
 
+  /**
+   * @description
+   * Get error min length
+   *
+   * @param field - control name
+   * @returns
+   */
   public getErrorMin(field: string) {
     return (
       this.form.get(field)?.hasError('minlength') &&
       this.form.get(field)?.touched
     );
   }
+
+  /**
+   * @description
+   * Get error url
+   *
+   * @param field - control name
+   * @returns
+   */
   public getErrorUrl(field: string) {
     return (
       this.form.get(field)?.hasError('validateUrl') &&
@@ -64,6 +116,12 @@ export class FormProductComponent {
     );
   }
 
+  /**
+   * @description
+   * Changing the date of date_release assigns the date plus one year to the date_revision control.
+   *
+   * @returns
+   */
   public onChangeDate() {
     let dateAddYear = new Date(this.form.get('date_release')?.value);
     dateAddYear.setFullYear(dateAddYear.getFullYear() + 1);
@@ -72,6 +130,12 @@ export class FormProductComponent {
       ?.setValue(dateAddYear.toISOString().split('T')[0]);
   }
 
+  /**
+   * @description
+   * Saves the form data to the API.
+   *
+   * @returns
+   */
   public async onSaveForm() {
     this.form.markAllAsTouched();
     if (this.form.invalid) return;
@@ -103,6 +167,13 @@ export class FormProductComponent {
     }
   }
 
+  /**
+   * @description
+   * Creates a new product in the API.
+   *
+   * @param {Product} data - Product data
+   * @returns
+   */
   private async createProduct(data: Product) {
     try {
       let resp = await firstValueFrom(this._productService.createProduct(data));
@@ -111,6 +182,13 @@ export class FormProductComponent {
     }
   }
 
+  /**
+   * @description
+   * Updates an existing product in the API.
+   *
+   * @param {Product} data - Product data
+   * @returns
+   */
   private async updateProduct(data: Product) {
     try {
       let resp = await firstValueFrom(this._productService.updateProduct(data));
@@ -119,6 +197,12 @@ export class FormProductComponent {
     }
   }
 
+  /**
+   * @description
+   * Resets the form to its original state.
+   *
+   * @returns
+   */
   public onResetForm() {
     if (this.acction === 'edit') {
       this.form.patchValue({

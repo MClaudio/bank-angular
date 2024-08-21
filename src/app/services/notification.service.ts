@@ -10,18 +10,43 @@ export class NotificationService {
 
   constructor() {}
 
+  /**
+   * @description
+   * Get show notification.
+   *
+   * @returns
+   */
   public get show() {
     return this._show;
   }
 
+  /**
+   * @description
+   * Get color notification.
+   *
+   * @returns
+   */
   public get color() {
     return this._color;
   }
 
+  /**
+   * @description
+   * Get message notification.
+   *
+   * @returns
+   */
   public get message() {
     return this._message;
   }
 
+  /**
+   * @description
+   * Show success notification.
+   *
+   * @param {string} message - Message notification
+   * @returns
+   */
   public showSuccess(message: string) {
     if (this._show) {
       return;
@@ -34,6 +59,13 @@ export class NotificationService {
     }, 3000);
   }
 
+  /**
+   * @description
+   * Show error notification.
+   *
+   * @param {string} message - Message notification
+   * @returns
+   */
   public showError(message: string) {
     if (this._show) {
       return;
