@@ -1,0 +1,37 @@
+.content-links {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+.icon-button {
+  margin-right: 0.2em;
+  width: 5em !important;
+  height: 5em !important;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th,
+  td {
+    border-bottom: 1px solid #f5f5f5;
+    padding: 0.5em;
+    text-align: center;
+  }
+
+  thead {
+    background-color: rgb(236, 236, 236);
+  }
+  tbody{
+    tr:nth-child(even) {
+      background-color: rgb(241, 241, 241); /* Color alternativo para filas pares */
+    }
+  }
+}
+
+.size {
+  text-align: right !important;
+}

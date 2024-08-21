@@ -10,7 +10,6 @@ import { ProductEditComponent } from './products/product/product-edit.component'
 import { ProductViewComponent } from './products/product/product-view.component';
 import { FormsModule } from '@angular/forms';
 import { LoaderComponent } from '../../shared/loader/loader.component';
-import { NotificationComponent } from '../../shared/notification/notification.component';
 
 @NgModule({
   declarations: [

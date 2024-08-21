@@ -5,6 +5,7 @@ import { ProductService } from '../../../../services/product.service';
 import { firstValueFrom } from 'rxjs';
 import { NotificationService } from '../../../../services/notification.service';
 import { Router } from '@angular/router';
+import { ModalService } from '../../../../services/modal.service';
 
 @Component({
   selector: 'app-form-product',
@@ -18,7 +19,8 @@ export class FormProductComponent {
   constructor(
     private _productService: ProductService,
     private _notificationService: NotificationService,
-    private _router: Router
+    private _router: Router,
+    private _modalService: ModalService
   ) {}
 
   public getErrorRequired(field: string) {
@@ -71,12 +73,8 @@ export class FormProductComponent {
   }
 
   public async onSaveForm() {
-    console.log(this.form);
     this.form.markAllAsTouched();
-    console.log('form invalid', this.form.invalid);
     if (this.form.invalid) return;
-
-    console.log(this.form.getRawValue());
     try {
       let data: Product = {
         ...this.form.getRawValue(),
@@ -87,8 +85,6 @@ export class FormProductComponent {
           .toISOString()
           .split('T')[0],
       };
-      console.log('data send', data);
-
       if (this.acction === 'new') {
         await this.createProduct(data);
         this._notificationService.showSuccess('Product created successfully');
@@ -97,15 +93,19 @@ export class FormProductComponent {
         this._notificationService.showSuccess('Product updated successfully');
       }
       this._router.navigate(['/product']);
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
+      this._modalService.openModal(
+        'error',
+        'Error',
+        error?.error?.message || error?.message || JSON.parse(error)
+      );
     }
   }
 
   private async createProduct(data: Product) {
     try {
       let resp = await firstValueFrom(this._productService.createProduct(data));
-      console.log('createProduct', resp);
     } catch (error) {
       throw error;
     }
@@ -114,9 +114,12 @@ export class FormProductComponent {
   private async updateProduct(data: Product) {
     try {
       let resp = await firstValueFrom(this._productService.updateProduct(data));
-      console.log('updateProduct', resp);
     } catch (error) {
       throw error;
     }
+  }
+
+  public onResetForm() {
+    this.form.reset();
   }
 }

@@ -1,0 +1,38 @@
+.form-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-control {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 768px) {
+  .form-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+button {
+  grid-column: span 2;
+}
+
+@media (max-width: 768px) {
+  button {
+    grid-column: span 1;
+  }
+}
+
+.reset-btn{
+  background-color: #f1f1f1;
+  color: #000;
+}
+
+.title{
+  text-align: center;
+  border-bottom: 1px solid #939393;
+  padding-bottom: 0.5em;
+}
+

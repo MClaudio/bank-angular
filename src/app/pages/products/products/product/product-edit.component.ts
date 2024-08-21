@@ -8,6 +8,7 @@ import {
 import { ProductService } from '../../../../services/product.service';
 import { ActivatedRoute } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
+import { ModalService } from '../../../../services/modal.service';
 
 @Component({
   selector: 'app-product-edit',
@@ -22,14 +23,14 @@ export class ProductEditComponent {
   constructor(
     private _fb: FormBuilder,
     private _productService: ProductService,
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
+    private _modalService: ModalService
   ) {
     let params: any = this._route.snapshot.params;
     this._id = params.id;
     if (!this._id) {
       window.history.back();
     }
-    console.log('id', this._id);
     this.loadProduct();
   }
 
@@ -38,12 +39,16 @@ export class ProductEditComponent {
       let resp = await firstValueFrom(
         this._productService.getProduct(this._id)
       );
-      console.log('resp', resp);
       this.loadForm();
       this.form.patchValue(resp);
-    } catch (error) {
+    } catch (error: any) {
       window.history.back();
       console.log(error);
+      this._modalService.openModal(
+        'error',
+        'Error',
+        error?.error?.message || error?.message || JSON.parse(error)
+      );
     }
   }
 

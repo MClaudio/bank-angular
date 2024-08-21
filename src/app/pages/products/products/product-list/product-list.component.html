@@ -1,55 +1,68 @@
-<a [routerLink]="[ 'new']">New Product</a>
+<div class="content-links">
+  <input class="" (change)="onSearch()" [(ngModel)]="search" type="search" name="search" id="search"
+    placeholder="Search...">
+  <a [routerLink]="[ 'new']">New Product</a>
+</div>
 
 <ng-container *ngIf="loader; else elseLoaderTemplate">
-    <div class="loader-container">
-        <app-loader></app-loader>
-    </div>
+  <div class="loader-container">
+    <app-loader></app-loader>
+  </div>
 </ng-container>
 <ng-template #elseLoaderTemplate>
 
-    <input (change)="onSearch()" [(ngModel)]="search" type="search" name="search" id="search" placeholder="Search">
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Logo</th>
-                <th>Date release</th>
-                <th>Date revision</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let product of products">
-                <td>{{ product.id }}</td>
-                <td>{{ product.name }}</td>
-                <td>{{ product.description }}</td>
-                <td>{{ product.logo }}</td>
-                <td>{{ product.date_release }}</td>
-                <td>{{ product.date_revision }}</td>
-                <td>
-                    <a class="icon-button" [routerLink]="[ 'view', product.id]" title="View">&#9732;</a>
-                    <a class="icon-button" [routerLink]="[ 'edit', product.id]" title="Edit">&#9998;</a>
-                    <a class="icon-button" (click)="deleteProduct(product.id)" title="delete">&#10006;</a>
-                </td>
-            </tr>
-        </tbody>
-        <tfoot>
-            <tr>
-                <td>
-                    {{length}} Results
-                </td>
-                <td colspan="6" align="right">
-                    <label for="size">Size</label>
-                    <select (change)="onChangeSize()" [(ngModel)]="size" id="size" name="size">
-                        <option value="5">5</option>
-                        <option value="10">10</option>
-                        <option value="20">20</option>
-                    </select>
-                </td>
-            </tr>
-        </tfoot>
+  <div class="mt-2 wf" style="overflow-x: scroll;">
+
+    <table class="table wf">
+      <thead>
+        <tr>
+          <th>Logo</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Date release</th>
+          <th>Date revision</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products">
+          <td>
+            <img [src]="product.logo" [alt]="product.name" width="100">
+          </td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.description }}</td>
+          <td>{{ product.date_release | date:'M/d/yyyy'}}</td>
+          <td>{{ product.date_revision | date:'M/d/yyyy'}}</td>
+          <td>
+            <a class="icon-button" [routerLink]="[ 'view', product.id]" title="View">&#9732;</a>
+            <a class="icon-button" [routerLink]="[ 'edit', product.id]" title="Edit">&#9998;</a>
+            <a class="icon-button" (click)="deleteProduct(product.id)" title="delete">&#10006;</a>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr *ngIf="length === 0">
+          <td colspan="7">
+            <span>
+              No products found
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            {{length}} Results
+          </td>
+          <td class="size" colspan="6">
+            <label class="mr-1" for="size">Size</label>
+            <select (change)="onChangeSize()" [(ngModel)]="size" id="size" name="size">
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="20">20</option>
+            </select>
+          </td>
+        </tr>
+      </tfoot>
     </table>
+  </div>
 
 </ng-template>

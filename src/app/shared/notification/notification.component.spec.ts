@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NotificationComponent } from './notification.component';
+import { CommonModule } from '@angular/common';
 
 describe('NotificationComponent', () => {
   let component: NotificationComponent;

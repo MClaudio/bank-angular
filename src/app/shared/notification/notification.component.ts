@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NotificationService } from '../../services/notification.service';
 import { CommonModule } from '@angular/common';
 
@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './notification.component.scss',
 })
 export class NotificationComponent {
-  @ViewChild('container') container!: HTMLElement;
+  @ViewChild('container') container!: ElementRef;
 
   constructor(private _notificationService: NotificationService) {}
 
