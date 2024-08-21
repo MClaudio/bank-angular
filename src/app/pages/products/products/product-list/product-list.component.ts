@@ -82,14 +82,14 @@ export class ProductListComponent implements OnInit, OnDestroy {
    * @description
    * Deletes a product from the API.
    *
-   * @param {string | undefined} id - Product ID
+   * @param {Product} product - Product
    * @returns
    */
-  public async deleteProduct(id: string | undefined) {
+  public async deleteProduct(product: Product) {
     try {
       this._modalService.openModal(
         'error',
-        'Delete product id:' + id,
+        'Delete product ' + product.name,
         'Are you sure you want to delete this product?',
         true
       );
@@ -98,11 +98,11 @@ export class ProductListComponent implements OnInit, OnDestroy {
         async (isOk: boolean) => {
           if (isOk) {
             let resp = await firstValueFrom(
-              this._productService.deleteProduct(id as string)
+              this._productService.deleteProduct(product.id as string)
             );
             this._notificationService.showSuccess('Product deleted');
             this.products = this.products.filter(
-              (product: Product) => product.id !== id
+              (item: Product) => item.id !== product.id
             );
           }
         }
