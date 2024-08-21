@@ -120,6 +120,16 @@ export class FormProductComponent {
   }
 
   public onResetForm() {
-    this.form.reset();
+    if (this.acction === 'edit') {
+      this.form.patchValue({
+        name: null,
+        description: null,
+        logo: null,
+        date_release: null,
+        date_revision: null,
+      });
+    } else {
+      this.form.reset();
+    }
   }
 }
